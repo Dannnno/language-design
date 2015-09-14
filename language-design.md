@@ -79,13 +79,24 @@ you know a poorly designed language? What are the symptoms?
 
 **Response**
 
-There isn't really a definitive set of rules for determining what is (or is not) a "well-designed" language.  In general you can have an idea about how well-designed a language is by how easy it is for you to use it, how many other people use it (proportional to how long it has been around/known), and if it meets some other criteria.  For example, as Steele pointed out in his article, "the sole way to win is to plan for growth" [Steele 1998]. Thus a well-designed language needs to plan for growth, both by the developers and by users.  It should also be relatively straightforward to use - the more you have to check the documentation for a single task, the more likely it is that it was poorly designed.  "Documentation matters." [Bloch 2006].  By the same token, it should follow the principle of least surprise - "Every method should
-do the least surprising thing it could, given its name. If a method
-doesn’t do what users think it will, bugs will result." [Bloch 2006]
+There isn't really a definitive set of rules for determining what is (or is not) a "well-designed" language.  In general you can have an idea about how well-designed a language is by how easy it is for you to use it, how many other people use it (proportional to how long it has been around/known), and if it meets some other criteria.  For example, as Steele pointed out in his article, "the sole way to win is to plan for growth" [Steele 1998]. Thus a well-designed language needs to plan for growth, both by the developers and by users.  It should also be relatively straightforward to use - the more you have to check the documentation for a single task, the more likely it is that it was poorly designed.  "Documentation matters." [Bloch 2006].  By the same token, it should follow the principle of least surprise:
+
+> Every method should do the least surprising thing it could, given its name. If a method doesn’t do what users think it will, bugs will result. [Bloch 2006]
 
 Additionally it should be designed to take as much of the load off of the user as possible - for example, if a large amount of boiler plate code is required to do a certain task, that boiler plate should be pulled into the language itself and only require the minimum amount of input from the user.  "Don’t make the client do anything the library could do" [Bloch 2006]. This leads into the additional point of productivity - users should be able to use the language without fighting it, and be able to complete their tasks in a productive manner.
 
-Additionally, in the case of a DSL, it should be usable by domain experts who have little to no knowledge of programming.  Likewise, it should be difficult to misuse (and ideally easy to use for what it is designed as well).  "What is easy to do?  What is hard to do?  What is impossible?" [Prof Ben, 2015].
+Furthermore, in the case of a DSL, it should be usable by domain experts who have little to no knowledge of programming.
+  
+> [The] enabling of software development by users with less domain and programming expertise, or even by end-users with some domain, but virtually no
+programming expertise [Nardi 1993; Sutcliffe and Mehandjiev 2004]. [Mernik _et al._, 2005]
+
+Likewise, it should be difficult to misuse (and ideally easy to use for what it is designed as well).  
+ 
+> **APIs should be easy to use and hard to misuse.** It should be
+easy to do simple things; possible to do complex things; and
+impossible, or at least difficult, to do wrong things. [Block, 2006].
+
+"What is easy to do?  What is hard to do?  What is impossible?" [Prof Ben, 2015].
 
 ---
  
@@ -95,7 +106,13 @@ In what way is an API a language?
 
 **Response**
 
-An API is a way to communicate a series of instructions to a computer. It defines a set of concepts and abstractions about objects and manipulations, to make it easier to use and understand by humans. It defines exactly what is easy to do, what is possible to do, and what cannot or shouldn't be done. It is often difficult for the users to directly modify an API. However, it still needs to be able to be used flexibly and extensibly, in situations and for purposes that were not foreseen when it was developed. Things that can be problematic for a language can also be problematic for an API, from the need of documentation to violating the principle of least surprise. The main difference is that in an API, your choices of syntax and power are more limited than the general case. However, as it tends more and more towards a true internal DSL, that boundary can also become blurrier.
+An API is a way to communicate a series of instructions to a computer. It defines a set of concepts and abstractions about objects and manipulations, to make it easier to use and understand by humans. It defines exactly what is easy to do, what is possible to do, and what cannot or shouldn't be done.
+ 
+> **APIs should be easy to use and hard to misuse.** It should be
+easy to do simple things; possible to do complex things; and
+impossible, or at least difficult, to do wrong things. [Block, 2006].
+
+It is often difficult for the users to directly modify an API. However, it still needs to be able to be used flexibly and extensibly, in situations and for purposes that were not foreseen when it was developed. Things that can be problematic for a language can also be problematic for an API, from the need of documentation to violating the principle of least surprise. The main difference is that in an API, your choices of syntax and power are more limited than the general case. However, as it tends more and more towards a true internal DSL, that boundary can also become blurrier.
 
 It might be possible to give technical definitions that would let you distinguish APIs and full-blown languages. But, if you were to take Python's duck-typing approach and ask, "Does it look like a language? Does it act like a language?", the answer is yes.
 
@@ -140,7 +157,7 @@ While an easier language to learn may help to some extent, there are many other 
 
 On the other hand, it is maybe irresponsible to dismiss the complaints of those who are less technically fluent. We don't want to make the mistake of conflating the problem with the flawed suggested solution, thereby discarding both.
 
-The "repeat" code example given in the article is an excellent microcosm of this point. Several commenters correctly point out that "repeat" is actually a horrible solution. You almost never want to loop some number of times, that's just incidental. The actual concept being expressed is that you want to do something for each element of some collection. The standard for-loop notation is much more flexible and (eventually) understandable than the "repeat" notation. However, although "repeat" is a bad idea, revisiting for-loops is not. If Guido van Rossum had not paid attention to this kind of complaint, we would never have gotten Python.
+The `repeat` code example given in the article is an excellent microcosm of this point. Several commenters correctly point out that `repeat` is actually a horrible solution. You almost never want to loop some fixed number of times, that's just incidental. The actual concept being expressed is that you want to do something for each element of some collection. The standard for-loop notation is much more flexible and (eventually) understandable than the `repeat` notation. However, although `repeat` is a bad idea, revisiting for-loops is not. If Guido van Rossum had not paid attention to this kind of complaint, we would never have gotten Python.
 
 A lot of advances we've made past older languages that are now ridiculed for being obtuse came from listening. We should accept that these are real problems, with non-obvious and tradeoff-y solutions, but that solving them would be a *good* thing. The real point that should be made to people who bring up complaints like these isn't that they're foolish and don't know what they're talking about. It's that despite first appearances, these issues are extremely difficult to solve well, but we are indeed going to try.
 
