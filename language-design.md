@@ -26,6 +26,8 @@ What I really like about this section is that it really addresses what it means 
 
 In today's era of quickly shifting standards and models, where every year some hot new language or approach to design comes out, we need to be more flexible with how we use languages, and how and why we design new ones.  When we think of language design as a tool for making more tools, we greatly enhance our ability to use existing tools in new ways, because they were designed to be used in new ways.  This is what it really means, to me, to build a working vocabulary.  Like the author mentioned in the text, every language has some set of primitives, and in order to extend that language you must define things in terms of those primitives.  As you build your working vocabulary you're naturally extending the language, and developing new programs.
 
+As a side note, even though this class focuses on language design, you can also look at this quote from the other direction. That is, when you are just doing standard coding, you are still not free to ignore the problems that language design has. Ultimately, your code will be used by other people, and will be adapted and grown into doing things it was not originally intended to do. The code you write implicitly defines a mode of thought and a way to interface human ideas with the computer. In the same way that scientists still have to learn to write well and communicate their ideas, code has to be usable and extensible. So, studying language design may well also be useful when just "coding".
+
 > If your standard is natural language, division/fraction notation isn't particularly intuitive.
 > But to someone who knows the notation, ab / b is very intuitive, and it's immediately obvious that
 > you can cancel the bs. So the goal of an intuitive programming syntax shouldn't be to emulate
@@ -35,6 +37,8 @@ In today's era of quickly shifting standards and models, where every year some h
 
 I feel that this comment on the Pavlus article really gets to the heart of the matter - that knowing the notation is part of any (technical) job, and once you can grok it, it becomes second nature.  So while natural language may make it easier to read and write code at first, when it comes down to it the most important thing is making sure that someone who uses it often (i.e. professionals and very passionate amateurs) can do what they need to do clearly and easily.
 
+The other point is that often, natural language is *not* actually suitable for certain purposes. Many notations are much *easier* than natural language. Usability is indeed a good aspiration, but the answer isn't so simple as "natural language". In fact, there probably isn't just one good answer. Hence why we are in a class called domain-specific languages!
+
 > **Example code should be exemplary.**  
 > If an API is used widely, its examples will be the archetypes 
 > for thousands of programs. Any mistakes will come back to haunt 
@@ -42,6 +46,7 @@ I feel that this comment on the Pavlus article really gets to the heart of the m
 
 This is perhaps my favorite quote of the entire reading.  Having spent this past summer working with a horrible API (most modules were not documented, and only 23% of the examples worked (we checked)) I appreciate and understand this the most.  Your API is how to get developers to use your project.  If you make a large barrier to entry in the form of missing or bad documentation and examples, they will look elsewhere for their solutions. 
 
+Meanwhile, bad examples are also indicative of other problems. To make a good language, you should have a good idea of how it should be used. Furthermore, it should be useful in the sense that "the way it should be used" should be *good*. If you find yourself writing poor examples, that may mean that the easiest thing to do in your framework is write bad code, and that you may not have put enough time into considering how you intend your work to be used.
 
 ---
 
@@ -63,7 +68,7 @@ who, all told, beg for twenty kinds of numbers. The language should have a way f
 user to define number types that work well with each other, and with plus signs and other
 such signs, and with the many ways of pushing bits in and out of the computer.  [Steele, 1998]
 
-It wouldn't have made sense for the designer of the sound lab to make it able to work with whole scores - but it should have been designed so that someone else could make it do that if they wanted to.  In the same way that it doesn't make sense for the language designer to define 20 numeric types, the designer should have 1000 sound transforms - but it should have been doable for those users who do need that functionality.
+It wouldn't have made sense for the designer of the sound lab to make it able to work with whole scores - but it should have been designed so that someone else could make it do that if they wanted to.  In the same way that it doesn't make sense for the language designer to define 20 numeric types, the designer shouldn't have 1000 sound transforms - but it should have been doable for those users who do need that functionality.
 
 ---
 
@@ -84,17 +89,15 @@ Additionally, in the case of a DSL, it should be usable by domain experts who ha
 
 ---
  
-
+**Question**
+ 
 In what way is an API a language? 
 
 **Response**
 
-- You have an input interpreted as a series of instructions, generating an output
-- An API has the same problems as a language. It can be easy to grow, or not. It can be surprising,
-it can require documentation.
-- It's supposed to be a way for a human to get a computer to do a very specific task.
-- You don't have as many choices of syntax or power
-- It's usually difficult to modify
+An API is a way to communicate a series of instructions to a computer. It defines a set of concepts and abstractions about objects and manipulations, to make it easier to use and understand by humans. It defines exactly what is easy to do, what is possible to do, and what cannot or shouldn't be done. It is often difficult for the users to directly modify an API. However, it still needs to be able to be used flexibly and extensibly, in situations and for purposes that were not foreseen when it was developed. Things that can be problematic for a language can also be problematic for an API, from the need of documentation to violating the principle of least surprise. The main difference is that in an API, your choices of syntax and power are more limited than the general case. However, as it tends more and more towards a true internal DSL, that boundary can also become blurrier.
+
+It might be possible to give technical definitions that would let you distinguish APIs and full-blown languages. But, if you were to take Python's duck-typing approach and ask, "Does it look like a language? Does it act like a language?", the answer is yes.
 
 ---
 
@@ -135,19 +138,11 @@ However, perhaps the most important point that programmers make is that there is
 
 While an easier language to learn may help to some extent, there are many other  important (and often harder) concepts that are necessary. 
 
+On the other hand, it is maybe irresponsible to dismiss the complaints of those who are less technically fluent. We don't want to make the mistake of conflating the problem with the flawed suggested solution, thereby discarding both.
 
-- Article: Programming should have a lower barrier to entry, and should attempt to be more human
-- I agree that the problem stated is a problem.
-- But the article is implicitly saying that humanizing is definitely the solution to that problem
-- We need to be open minded, and not reject the problem because we don't like that solution
-- Maybe weird things (graphical languages, ???) are the solutions.
-Shouldn't stop thinking about this problem.
+The "repeat" code example given in the article is an excellent microcosm of this point. Several commenters correctly point out that "repeat" is actually a horrible solution. You almost never want to loop some number of times, that's just incidental. The actual concept being expressed is that you want to do something for each element of some collection. The standard for-loop notation is much more flexible and (eventually) understandable than the "repeat" notation. However, although "repeat" is a bad idea, revisiting for-loops is not. If Guido van Rossum had not paid attention to this kind of complaint, we would never have gotten Python.
 
-- Evidence-based design: An interesting idea!
-- Beware of "New Coke": Be careful of what you're testing.
-If you test based on new users, you're implicitly designing a lanugage that is suitable
-for new users, but not necessarily anything else. That is not the only measure of a good language.
-
+A lot of advances we've made past older languages that are now ridiculed for being obtuse came from listening. We should accept that these are real problems, with non-obvious and tradeoff-y solutions, but that solving them would be a *good* thing. The real point that should be made to people who bring up complaints like these isn't that they're foolish and don't know what they're talking about. It's that despite first appearances, these issues are extremely difficult to solve well, but we are indeed going to try.
 
 ---
 
@@ -193,30 +188,25 @@ you do so? If not, why not?
 
 **Response**
 
-- We're often told that we will read code more than we write it, so is this just
-saying AppleScript goes too far down that road?
+The quote that we already cited above is very relevant:
 
-- No matter how natural you try to get it, it's still going to have to be unambiguous.
+> If your standard is natural language, division/fraction notation isn't particularly intuitive.
+> But to someone who knows the notation, ab / b is very intuitive, and it's immediately obvious that
+> you can cancel the bs. So the goal of an intuitive programming syntax shouldn't be to emulate
+> natural language, necessarily, but to provide intuitive hooks and syntax for the types of things
+> that programmers do a lot. 
+> [Comment by "Peter" ([Source](https://www.fastcodesign.com/1665735/why-arent-computer-programming-languages-designed-better#comment-bc08f700-3c06-11e1-921b-9794fc737ae8))] [Pavlus, 2012]
 
-- There are lots of ways to express the idea of repetition, but it's probably best for
-maintainability's sake that there's only one real way to do it.
+There are (at least) two main considerations for syntax. The first is how well it fits the task at hand, *in a vacuum*. That is, how good it is considering only the language and the task, and not what users are already used to or know. The other is how easy it will be for real users to adopt. Considering this, the analogy with mathematics is apt. After all, mathematicians do *not* use natural language. They use mathematical notation, because
+it is simply better for the task. However, when new ideas come along, to begin with, the ideas are explained using natural language and older notation. The optimal descriptions for learning concepts are not the same as the optimal descriptions for using them.
 
-- For a DSL, since you're trying to aim it at someone who's a domain expert,
-you want it to be more readable. Just don't go too far.
-- You probably want to reflect what the experts do. So, if they use math and not
-natural language, math is actually going to be the more understandable choice.
+This mirrors the tradeoffs in language design pretty well. Ultimately, notation specially crafted for the task really is better, and not just for efficiency's sake. The price is the learning curve. There is also the risk of a syntax not becoming widely adopted and therefore not being suitable for discussing ideas with other people. The idea of extensible languages is somewhat of a solution to this. New concepts are first described in terms of primitives people already understand, but the universal language is flexible enough to allow new and more specialized notation to be added in beyond that point. This is how mathematics itself handles the problem.
 
-last paper: "DSL syntax can be close to the notations used by domain experts".
+The priority should probably be on how well the language design fits the actual task, on how good it is for people to use rather than to learn. Within that realm, you should optimize for familiarity. This means that, where suitable domain-specific notation and concepts exist, they should be used. This includes natural language, so if there is a natural language way to write something that doesn't really have any drawbacks, it should be preferred. Thus, for example, you should prefer Haskell's "if .. then .. else .." to Java's ".. ? .. : ..".
 
-Arguably, write-ability can be suplemented by IDEs, although that basically doesn't exist much yet.
-As long as it doesn't impair workflow, readabliity should be prioritized over write-ability,
-up until the point that write-ability becomes difficult.
+There are two final interesting ideas that might also be useful. First, as mentioned before, extensible languages naturally have a way to solve this problem to some extent, as useful new notation will simply appear as it becomes useful. Given that, it may be best to not only aim for *extensibility*, but also *reducibility*. If a language appears like it could have been an extension of some simpler language, then it may be easier to learn. Additionally, they will still be useful to people who only know a subset of the language.
 
-Never rely on the fact that your language is the only way to accomplish something
-
-Readability isn't just reading by novices, but also includes higher-level abstractions
-like design patterns, idioms, etc. Readability requires that the right way be the only or one of
-obvious ways to do it.
+Second, one last extremely hypothetical thought. Even in extensible languages, there is still the question of when to use the less convenient but more primitive description, and when to use the specialized notation. Looking up mathematical ideas on Wikipedia is awful because of how much terminology gets used. For someone who already understands the terminology, it's the best way to write it. But, if a more primitive description could be given without making it too much larger, then arguably that's the better explanation. IDEs may, in the future, provide some solution to this problem. As long as the mapping between primitive and specialized notation is one-to-one enough, it might be possible for two people to view and write the exact same code, but in different modes better suited to their understanding.
 
 ---
 
