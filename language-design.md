@@ -158,6 +158,10 @@ The best (and possibly only) reason to let the user know what the implementation
 
 In general, we should hide as much as possible - details about the internal parser or AST are almost certainly irrelevant to the end user, and would only confuse the user.  "**Keep APIs free of implementations details.**	 They confuse users and inhibit the flexibility to evolve." [Bloch, 2006].  In general, any implementation choice that affects how it is run, written, or edited, should be revealed to the user to the extent they need it for their workflow.
 
+However, there is a case that could be described as exposing implementation details. Sometimes we are tempted to hide implementation so much that we lose extensibility, and lock users into one workflow. For example, the CS5 sound lab tried to hide file operations except for reading in from an initial file. As a result, every function automatically wrote to a file and then played the result, because there was no easy way for the user to do those actions. Another related question is how much to allow interoperability between an internal DSL and the host language. Sometimes it is convenient to provide optional hooks into what could be considered implementation details.
+
+Therefore, implementation details should be hidden until the point that they limit extensibility. Those details that are exposed should be entirely optional, available to the advanced user who wants to extend functionality, but hidden from the novice.
+
 ---
 
 **Question**
