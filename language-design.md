@@ -175,6 +175,10 @@ The best (and possibly only) reason to let the user know what the implementation
 
 In general, we should hide as much as possible - details about the internal parser or AST are almost certainly irrelevant to the end user, and would only confuse the user.  "**Keep APIs free of implementations details.**	 They confuse users and inhibit the flexibility to evolve." [Bloch, 2006].  In general, any implementation choice that affects how it is run, written, or edited, should be revealed to the user to the extent they need it for their workflow.
 
+However, there is a case that could be described as exposing implementation details. Sometimes we are tempted to hide implementation so much that we lose extensibility, and lock users into one workflow. For example, the CS5 sound lab tried to hide file operations except for reading in from an initial file. As a result, every function automatically wrote to a file and then played the result, because there was no easy way for the user to do those actions. Another related question is how much to allow interoperability between an internal DSL and the host language. Sometimes it is convenient to provide optional hooks into what could be considered implementation details.
+
+Therefore, implementation details should be hidden until the point that they limit extensibility. Those details that are exposed should be entirely optional, available to the advanced user who wants to extend functionality, but hidden from the novice.
+
 ---
 
 **Question**
@@ -233,22 +237,17 @@ Briefly describe how you split up the work for this assignment.
 
 **Response**
 
-Read independently
-Made an outline together
-Then worked on different sections and came back together
+We read the readings independently and then met together to talk about them.  After talking about them together, we worked on an outline of our responses and then divvied up the writing work.
 
-Dan
-- Growing
-- Quotes
-- Well-designed
-- Implementation
-- comments #1
+| Dan                                 | Matt                      |
+| ----------------------------------- |-------------------------- |
+| Growing a Language                  | Growing a Language        |
+| Quote justification                 | Quote justification       |
+| Well-designed language              | Is an API a language      |
+| Hiding implementation details       | PLs as a natural language |
+| Commenter's point of view on Pavlus | Article's point of view   |
 
-Matt
-- Growing
-- Quotes
-- API
-- Natural language
-- comments #2
+
+We then met up together to proofread and do any editing, and then submitted the assignment.
 
 ---
